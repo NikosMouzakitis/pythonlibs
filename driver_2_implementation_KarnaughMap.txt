@@ -1,4 +1,12 @@
+
+#you need to sort every list after creating it.
 #(another implementation to create driver_2 list
+#a = 1
+#b = 2
+#c= 4
+#d = 8
+#cnt =2
+
 #for i in range(0,16):
 #    driver_2.append([a,b,c,d])
 #                            #setting the driver_2 to its correct value to implement the Karnough map.
