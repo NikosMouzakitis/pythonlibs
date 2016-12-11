@@ -1,0 +1,32 @@
+#(another implementation to create driver_2 list
+#for i in range(0,16):
+#    driver_2.append([a,b,c,d])
+#                            #setting the driver_2 to its correct value to implement the Karnough map.
+#for i in range(0,16):
+#    if(i%2 == 1):
+#        driver_2[i][0] = -a
+
+#for i in range(0,16):
+#    if(i == cnt):
+#        driver_2[i][1] = -b
+#        driver_2[i+1][1] = -b
+#        cnt +=4
+#cnt = 4
+#for i in range(0,16):
+#    if(i == cnt):
+#        driver_2[i][2] = -c
+#        driver_2[i+1][2] = -c
+#        driver_2[i+2][2] = -c
+#        driver_2[i+3][2] = -c
+#        cnt +=8
+#cnt = 8
+#for i in range(0,16):
+#    if(i == cnt):
+#        driver_2[i][3] = -d
+#        driver_2[i+1][3] = -d
+#        driver_2[i+2][3] = -d
+#        driver_2[i+3][3] = -d
+#        driver_2[i+4][3] = -d
+#       driver_2[i+5][3] = -d
+#        driver_2[i+6][3] = -d
+#        driver_2[i+7][3] = -d
