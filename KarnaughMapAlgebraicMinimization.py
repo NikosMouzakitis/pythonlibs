@@ -1,35 +1,10 @@
 #Algebraic Minimization with the Use of Karnaugh Map on a map with four variables.
 #__author__:Mouzakitis Nikolaos,Crete 2016.
+#Reading from a file named  "map.txt" locating in the same folder as your program.
+#"map.txt",must contain 16 sequential binary digits . f.e: 0111010010010111 that
+#will be used as the Karnaugh Map.
 
-def isAlone(lista,t):
-
-    ok = 0
-    ak= 0
-    l = len(lista)
-
-    for i in range(0,l-1):
-
-        if( lista[i] == 0):
-
-            pass
-
-        else:
-
-            if(i == t):
-
-                ok =1
-
-            else:
-
-                ak = 1
-
-    if( (ak == 0) and (ok ==1)):
-
-        return 1
-
-    else:
-
-        return 0
+# v.2
 
 def minimization(k):
 
@@ -145,17 +120,17 @@ def minimization(k):
     solution = ""
     timer = 0
 
-    while (max(already_combined) >= 1):
+    while (max(already_combined) > 1):
 
         print("\nMINIMIZATION RUNS\n")
 
         for i in range(0, 16):
 
-            if (   (combo[i] == 2 )  and isAlone(already_combined,i) and (timer > 4)   ):
+            if (   (combo[i] == 2 )   and (timer > 2)   ):
 
                 for j in range(0, 4):
 
-                    if ((k[i] and k[i + driver_2[i][j]]) ): # and zero[i + driver_2[i][j]] == 0
+                    if ((k[i] and k[i + driver_2[i][j]]) and (already_combined[i] != 0) and zero[i + driver_2[i][j]] == 0 ): # and zero[i + driver_2[i][j]] == 0
 
                         duo = []
                         duo.append(i)
@@ -220,8 +195,9 @@ def minimization(k):
 
             for j in range(0, 4):
 
-                if ((map_copy[max_thesis] and map_copy[max_thesis + driver_2[max_thesis][j]]) ):
-                    #and zero[max_thesis + driver_2[max_thesis][j]] == 0
+
+                if ((map_copy[max_thesis] and map_copy[max_thesis + driver_2[max_thesis][j]]) and ((already_combined[max_thesis] != 0)  ) ):
+
 
                     duo = []
                     duo.append(max_thesis)
@@ -304,7 +280,7 @@ def minimization(k):
 
                     pass
 
-    print("F(A,B,C,D)=", solution)
+    print("\nMinimization Results:\n\nF(A,B,C,D)=", solution[:-2])
 
 def solver(arg):
 
@@ -472,15 +448,16 @@ def solver(arg):
         elif(arg == [0,1,4,5,8,9,12,13]):
             sol += " C' "
         elif(arg == [1,3,5,7,9,11,13,15]):
-            sol += " C "
+            sol += " D "
         elif(arg == [4,5,6,7,12,13,14,15]):
             sol += " B "
         elif(arg == [2,3,6,7,10,11,14,15]):
-            sol += " D "
+            sol += " C "
         elif(arg == [8,9,10,11,12,13,14,15]):
             sol += " A "
 
-    return sol
+
+    return sol + " + "
 
 def print_k(k):
 
@@ -488,7 +465,7 @@ def print_k(k):
     line2 = [4,5,7,6]
     line3 = [12,13,15,14]
     line4 = [8,9,11,10]
-    print("KARNOUGHT   MAP   DISPLAY\n")
+    print("KARNAUGH   MAP   DISPLAY\n")
     print((str)(k[line1[0]]) +"\t"+(str)(k[line1[1]])+"\t"+(str)(k[line1[2]])+"\t"+(str)(k[line1[3]])+"\n")
     print((str)(k[line2[0]]) +"\t"+(str)(k[line2[1]])+"\t"+(str)(k[line2[2]])+"\t"+(str)(k[line2[3]])+"\n")
     print((str)(k[line3[0]]) +"\t"+(str)(k[line3[1]])+"\t"+(str)(k[line3[2]])+"\t"+(str)(k[line3[3]])+"\n")
@@ -530,12 +507,12 @@ driver_4.append([ [1,2,3],[-4,4,8],[1,8,9],[-4,-3,1],[-4,-2,2],[2,8,10] ])
 driver_4.append([ [-1,1,2],[-4,4,8],[2,8,10],[-4,-2,2],[-5,-4,-1],[-1,7,8] ])
 driver_4.append([ [-4,4,8],[-2,-1,1],[-4,-3,1],[1,8,9],[-2,6,8],[-6,-4,-2] ])
 driver_4.append([ [-4,4,8],[-3,-2,-1],[-2,6,8],[-6,-4,-2],[-5,-4,-1],[-1,7,8] ])
-driver_4.append([ [4,-4,-8],[1,2,3],[2,-6,-8],[6,4,2],[5,4,1],[1,-7,-8] ])
-driver_4.append([ [-4,4,8],[2,1,-1],[4,3,-1],[-1,-8,-9],[2,-6,-8],[6,4,2] ])
-driver_4.append([ [-1,1,2],[4,-4,-8],[-2,-8,-10],[4,2,-2],[5,4,1],[1,-7,-8] ])
-driver_4.append([ [-1,-2,-3],[4,-4,-8],[-1,-8,-9],[4,3,-1],[4,2,-2],[-2,-8,-10] ])
-driver_4.append([ [1,2,3],[-4,-8,-12],[1,-3,-4],[2,-2,-4],[2,-6,-8],[1,-7,-8] ])
-driver_4.append([ [2,1,-1],[-4,-8,-12],[2,-6,-8],[-1,-4,-5],[2,-2,-4],[-9,-8,-1] ])
+driver_4.append([ [-8,-4,4],[1,2,3],[-8,-6,2],[6,4,2],[5,4,1],[-8,-7,1] ])
+driver_4.append([ [-8,-4,4],[-1,1,2],[-1,3,4],[-9,-8,-1],[-8,-6,2],[6,4,2] ])
+driver_4.append([ [-2,-1,1],[-8,-4,4],[-10,-8,-2],[-2,2,4],[1,4,5],[-8,-7,1] ])
+driver_4.append([ [-3,-2,-1],[-4,-8,4],[-9,-8,-1],[-1,3,4],[-2,2,4],[-10,-8,-2] ])
+driver_4.append([ [1,2,3],[-12,-8,-4],[-4,-3,1],[-4,-2,2],[-8,-6,2],[-8,-7,1] ])
+driver_4.append([ [-1,1,2],[-12,-8,-4],[-8,-6,2],[-5,-4,-1],[-4,-2,2],[-9,-8,-1] ])
 driver_4.append([ [1,-1,-2],[-12,-8,-4],[1,-3,-4],[-6,-4,-2],[1,-7,-8],[-10,-8,-2] ])
 driver_4.append([ [-3,-2,-1],[-12,-8,-4],[-5,-4,-1],[-6,-4,-2],[-10,-8,-2],[-9,-8,-1] ])
 #-------------SETTING UP THE LIST driver_8------------------------------------------------------
@@ -557,8 +534,22 @@ driver_8.append([ [1,-1,-2,-3,-4,-5,-6],[1,-1,-2,-7,-8,-9,-10],[1,-3,-4,-7,-8,-1
 driver_8.append([ [-1,-2,-3,-4,-5,-6,-7],[-1,-2,-3,-8,-9,-10,-11],[-1,-4,-5,-8,-9,-12,-13],[-2,-4,-6,-8,-10,-12,-14] ] )
 #-----------------------------------------------------------------------------------------------
 
+'''  #GETTING INPUT FROM KEABORD CODE
 for i in range(0,16):
     midterm = (int)(input('Enter the ['+(str)(i)+"] midterm.\n"))
     k_map.append(midterm)
+'''
+try:
+    fd = open("map.txt","r")
+    line = fd.readline()
+    for i in line:
+        k_map.append( (int) (i))
 
-minimization(k_map)
+
+    minimization(k_map)
+except IOError as err:
+    print("Error occured:%s"%(str)(err))
+
+finally:
+    if 'fd' in locals():
+        fd.close()
