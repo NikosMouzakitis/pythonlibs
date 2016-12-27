@@ -1,3 +1,5 @@
+#there is still a small bug , that will be fixed next days in the version 3 that will support also Graphical User Interface.
+
 #Algebraic Minimization with the Use of Karnaugh Map on a map with four variables.
 #__author__:Mouzakitis Nikolaos,Crete 2016.
 #Reading from a file named  "map.txt" locating in the same folder as your program.
