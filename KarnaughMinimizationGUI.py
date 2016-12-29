@@ -1,3 +1,5 @@
+#Karnaught Map minimization developed by Mouzakitis Nikolaos,2016.
+#4 variables minimazation.
 from tkinter import *
 
 root = None
